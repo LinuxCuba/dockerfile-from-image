@@ -1,11 +1,10 @@
-FROM alpine:3.5
-MAINTAINER CenturyLink Labs <clt-labs-futuretech@centurylink.com>
+FROM alpine:3.11
+MAINTAINER Arian Molina <linuxcuba@teknik.io>
 
-RUN apk --update add ruby-dev ruby make gcc libc-dev ca-certificates && \
-    gem install --no-rdoc --no-ri docker-api && \
-    apk del ruby-dev ca-certificates make gcc libc-dev && \
-    apk add ruby-json && \
-    rm /var/cache/apk/*
+RUN apk --update --no-cache add ruby-dev ruby make gcc libc-dev ca-certificates && \
+    gem install --no-document excon docker-api && \
+    apk del ruby-dev make gcc libc-dev && \
+    apk add --no-cache ruby-json
 
 ADD dockerfile-from-image.rb /usr/src/app/dockerfile-from-image.rb
 
